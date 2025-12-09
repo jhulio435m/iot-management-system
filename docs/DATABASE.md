@@ -145,26 +145,73 @@ erDiagram
 ## Esquema de Relaciones
 
 ```mermaid
-graph TB
-    A[users] -->|resolves| B[alerts]
-    A -->|performs| C[maintenance_logs]
+graph LR
+    %% --- ESTILOS COMPATIBLES (CLARO/OSCURO) ---
+    %% Usamos clases para facilitar el mantenimiento
+    %% Node Principal: Azul fuerte (texto blanco forzado para contraste)
+    classDef mainNode fill:#2563eb,stroke:#1e3a8a,stroke-width:3px,color:#ffffff;
     
-    D[locations] -->|hosts| E[devices]
+    %% Nodos de Contexto: Cian suave
+    classDef ctxNode fill:#0891b2,stroke:#155e75,color:#ffffff;
     
-    F[device_types] -->|defines| E
-    F -->|has versions| G[firmware_versions]
+    %% Nodos de Datos: Verde suave
+    classDef dataNode fill:#059669,stroke:#064e3b,color:#ffffff;
     
-    H[iot_projects] -->|contains| E
+    %% Nodos de Alertas: Naranja/Ámbar
+    classDef alertNode fill:#d97706,stroke:#78350f,color:#ffffff;
     
-    E -->|has| I[sensors]
-    E -->|generates| B
-    E -->|receives| C
-    
-    I -->|produces| J[sensor_readings]
-    
-    style E fill:#e1f5ff
-    style I fill:#ffe1f5
-    style J fill:#f5ffe1
+    %% Nodos de Actores: Violeta
+    classDef actorNode fill:#7c3aed,stroke:#4c1d95,color:#ffffff;
+
+    %% Configuración de curvas suaves
+    linkStyle default interpolate basis
+
+    %% --- GRUPO 1: UBICACIÓN Y PROYECTO ---
+    subgraph Contexto ["📍 Contexto"]
+        direction TB
+        D[LOCATIONS]:::ctxNode -->|alberga| H[IOT_PROJECTS]:::ctxNode
+        H -->|agrupa| E
+        D -.->|ubicación física| E
+    end
+
+    %% --- GRUPO 2: DEFINICIONES ---
+    subgraph Definiciones ["📝 Especificaciones"]
+        direction TB
+        F[DEVICE_TYPES]:::ctxNode -->|clasifica| E
+        F -->|tiene versiones| G[FIRMWARE_VERSIONS]:::ctxNode
+    end
+
+    %% --- NODO CENTRAL ---
+    E[DEVICES]:::mainNode
+
+    %% --- GRUPO 3: TELEMETRÍA ---
+    subgraph Telemetria ["📡 Telemetría"]
+        direction TB
+        E -->|tiene| I[SENSORS]:::dataNode
+        I -->|registra| J[SENSOR_READINGS]:::dataNode
+    end
+
+    %% --- GRUPO 4: GESTIÓN ---
+    subgraph Gestion ["⚠️ Eventos y Logs"]
+        direction TB
+        E -->|genera| B[ALERTS]:::alertNode
+        E -->|recibe| C[MAINTENANCE_LOGS]:::alertNode
+    end
+
+    %% --- GRUPO 5: ACTORES ---
+    subgraph Actores ["👤 Resolución"]
+        direction TB
+        B -->|resuelto por| A[USERS]:::actorNode
+        C -->|realizado por| A
+    end
+
+    %% --- ESTILOS DE SUBGRAFOS (Transparencia es la clave) ---
+    %% Al usar 'none' en el fill, el fondo se adapta al tema de GitHub (blanco o gris oscuro)
+    style Contexto fill:none,stroke:#0891b2,stroke-width:2px,stroke-dasharray: 5 5,color:#0891b2
+    style Definiciones fill:none,stroke:#0891b2,stroke-width:2px,stroke-dasharray: 5 5,color:#0891b2
+    style Telemetria fill:none,stroke:#059669,stroke-width:2px,stroke-dasharray: 5 5,color:#059669
+    style Gestion fill:none,stroke:#d97706,stroke-width:2px,stroke-dasharray: 5 5,color:#d97706
+    style Actores fill:none,stroke:#7c3aed,stroke-width:2px,stroke-dasharray: 5 5,color:#7c3aed
 ```
 
 ## Descripción Detallada de Tablas
