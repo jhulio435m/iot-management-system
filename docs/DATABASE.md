@@ -639,5 +639,8 @@ Este diseño de base de datos proporciona:
 
 ---
 
-**Última actualización**: Diciembre 2025 
-**Versión del esquema**: 1.0.0
+**Versión**: 1.0.0  
+**Fecha**: Diciembre 2025  
+**Curso**: Diseño de Base de Datos  
+**Facultad**: FIS - UNCP  
+**Tecnologías**: React, TypeScript, PostgreSQL, Supabase
