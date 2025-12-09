@@ -777,6 +777,8 @@ EXPLAIN ANALYZE SELECT * FROM devices;
 
 ---
 
-**Última Actualización**: Enero 2025  
-**Total de Consultas**: 45+  
-**Curso**: Diseño de Base de Datos - FIS UNCP
+**Versión**: 1.0.0  
+**Fecha**: Diciembre 2025  
+**Curso**: Diseño de Base de Datos  
+**Facultad**: FIS - UNCP  
+**Tecnologías**: React, TypeScript, PostgreSQL, Supabase
