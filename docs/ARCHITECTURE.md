@@ -26,41 +26,52 @@ Este documento describe la arquitectura técnica implementada en el proyecto aca
 
 ```mermaid
 graph TD
-    %% Definición de estilos profesionales
-    classDef frontend fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
-    classDef backend fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
-    classDef database fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    %% --- DEFINICIÓN DE PALETA PASTEL ---
+    %% Frontend: Azul muy suave (Pastel) - Texto azul oscuro
+    classDef frontend fill:#e1f5fe,stroke:#81d4fa,stroke-width:2px,color:#0277bd;
     
-    %% Configuración del Grafo
+    %% Backend: Lila suave (Pastel) - Texto violeta oscuro
+    classDef backend fill:#f3e5f5,stroke:#ce93d8,stroke-width:2px,color:#7b1fa2;
+    
+    %% Database: Verde menta suave (Pastel) - Texto verde oscuro
+    classDef database fill:#e8f5e9,stroke:#a5d6a7,stroke-width:2px,color:#2e7d32;
+    
+    %% Configuración de líneas suaves
+    linkStyle default stroke:#b0bec5,stroke-width:2px;
+
+    %% --- GRUPO 1: CLIENTE ---
     subgraph Client [" Capa 1: Presentación "]
         direction TB
-        Componentes[React Components]
-        Vistas[9 Vistas Principales]
-        Forms[9 Formularios CRUD]
+        Componentes[React Components]:::frontend
+        Vistas[9 Vistas Principales]:::frontend
+        Forms[9 Formularios CRUD]:::frontend
     end
     
-    subgraph Server [" Capa 2: Lógica de Negocio "]
+    %% --- GRUPO 2: SERVIDOR ---
+    subgraph Server ["Capa 2: Lógica de Negocio "]
         direction TB
-        Hono[[Hono.js Server]]
-        Endpoints[28 Endpoints REST]
-        Validacion{{Validación de Datos}}
+        Hono[[Hono.js Server]]:::backend
+        Endpoints[28 Endpoints REST]:::backend
+        Validacion{{Validación de Datos}}:::backend
     end
     
-    subgraph DB [" Capa 3: Persistencia "]
+    %% --- GRUPO 3: BASE DE DATOS ---
+    subgraph DB ["Capa 3: Persistencia "]
         direction TB
-        Postgres[(PostgreSQL)]
-        Tablas[10 Tablas - 3FN]
-        FK[15 Relaciones FK]
+        Postgres[(PostgreSQL)]:::database
+        Tablas[10 Tablas - 3FN]:::database
+        FK[15 Relaciones FK]:::database
     end
     
-    %% Relaciones
+    %% --- RELACIONES ---
     Client ==>|"HTTPS / JSON"| Server
     Server ==>|"SQL / TCP"| DB
     
-    %% Asignación de estilos
-    class Componentes,Vistas,Forms frontend;
-    class Hono,Endpoints,Validacion backend;
-    class Postgres,Tablas,FK database;
+    %% --- ESTILOS DE SUBGRAFOS (COMPATIBILIDAD DARK/LIGHT) ---
+    %% Usamos fill:none para que el fondo sea transparente y se adapte al tema de GitHub
+    style Client fill:none,stroke:#81d4fa,stroke-width:2px,stroke-dasharray: 5 5,color:#0277bd
+    style Server fill:none,stroke:#ce93d8,stroke-width:2px,stroke-dasharray: 5 5,color:#7b1fa2
+    style DB fill:none,stroke:#a5d6a7,stroke-width:2px,stroke-dasharray: 5 5,color:#2e7d32
 ```
 
 ### Responsabilidades por Capa
