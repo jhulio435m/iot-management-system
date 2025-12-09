@@ -4,13 +4,38 @@
 
 ## Integrantes del Equipo
 
-| Apellidos y Nombres | Código |
-|---------------------|--------|
-| Alanya Carbajal Cristian |        |
-| Mandujano Vicente Adriel |        |
-| Morán de la Cruz Jhulio |        |
-| Mucha Parra Mijail |        |
-| Yurivilca Espinoza Hector |        |
+<div align="center">
+  <table>
+    <thead>
+      <tr>
+        <th>Integrante</th>
+        <th>Código</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>👤 <b>Alanya Carbajal Cristian</b></td>
+        <td><code>2203100675l</code></td>
+      </tr>
+      <tr>
+        <td>👤 <b>Mandujano Vicente Adriel</b></td>
+        <td><code>2023100687k</code></td>
+      </tr>
+      <tr>
+        <td>👤 <b>Morán de la Cruz Jhulio</b></td>
+        <td><code>2023200631G</code></td>
+      </tr>
+      <tr>
+        <td>👤 <b>Mucha Parra Mijail</b></td>
+        <td><code>2023101473G</code></td>
+      </tr>
+      <tr>
+        <td>👤 <b>Yurivilca Espinoza Hector</b></td>
+        <td><code>2023100700k</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 **Curso**: Diseño de Base de Datos  
 **Facultad**: Facultad de Ingeniería de Sistemas (FIS)  
