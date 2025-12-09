@@ -25,27 +25,42 @@ Este documento describe la arquitectura técnica implementada en el proyecto aca
 ### Arquitectura de Tres Capas
 
 ```mermaid
-graph TB
-    subgraph Frontend["Capa de Presentación (Frontend)"]
-        A[Componentes React/TypeScript]
-        B[Formularios CRUD]
-        C[Visualización de Datos]
+graph TD
+    %% Definición de estilos profesionales
+    classDef frontend fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef backend fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
+    classDef database fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    
+    %% Configuración del Grafo
+    subgraph Client [" Capa 1: Presentación "]
+        direction TB
+        Componentes[React Components]
+        Vistas[9 Vistas Principales]
+        Forms[9 Formularios CRUD]
     end
     
-    subgraph Backend["Capa de Lógica de Negocio (Backend)"]
-        D[Hono.js Server]
-        E[28 Endpoints REST]
-        F[Validación de Datos]
+    subgraph Server [" Capa 2: Lógica de Negocio "]
+        direction TB
+        Hono[[Hono.js Server]]
+        Endpoints[28 Endpoints REST]
+        Validacion{{Validación de Datos}}
     end
     
-    subgraph Database["Capa de Persistencia (Base de Datos)"]
-        G[(PostgreSQL)]
-        H[10 Tablas 3FN]
-        I[Constraints FK]
+    subgraph DB [" Capa 3: Persistencia "]
+        direction TB
+        Postgres[(PostgreSQL)]
+        Tablas[10 Tablas - 3FN]
+        FK[15 Relaciones FK]
     end
     
-    Frontend -->|HTTPS/REST| Backend
-    Backend -->|SQL Queries| Database
+    %% Relaciones
+    Client ==>|"HTTPS / JSON"| Server
+    Server ==>|"SQL / TCP"| DB
+    
+    %% Asignación de estilos
+    class Componentes,Vistas,Forms frontend;
+    class Hono,Endpoints,Validacion backend;
+    class Postgres,Tablas,FK database;
 ```
 
 ### Responsabilidades por Capa
@@ -322,6 +337,8 @@ El proyecto demuestra exitosamente la implementación de conceptos de arquitectu
 
 ---
 
-**Última Actualización**: Diciembre 2024  
 **Versión**: 1.0.0  
-**Tipo de Proyecto**: Académico - Bases de Datos Relacionales
+**Fecha**: Diciembre 2025  
+**Curso**: Diseño de Base de Datos  
+**Facultad**: FIS - UNCP  
+**Tecnologías**: React, TypeScript, PostgreSQL, Supabase
