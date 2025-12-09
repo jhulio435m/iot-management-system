@@ -627,66 +627,6 @@ Basado en un sistema de tamaño medio:
 | alerts | 10,000-100,000 | Medio-Alto |
 | maintenance_logs | 5,000-50,000 | Medio |
 
-## Estrategias de Backup
-
-### Backup Completo
-- Frecuencia: Diario (nocturno)
-- Retención: 30 días
-
-### Backup Incremental
-- Frecuencia: Cada 4 horas
-- Retención: 7 días
-
-### Replicación
-- Réplicas de lectura para consultas analíticas
-- Replicación geográfica para alta disponibilidad
-
-## Migración y Versionado
-
-### Control de Versiones
-Usar herramientas como Flyway o Liquibase para:
-- Versionado de cambios de esquema
-- Migraciones reproducibles
-- Rollback de cambios si es necesario
-
-### Ejemplo de Migración
-```sql
--- V1__initial_schema.sql
-CREATE TABLE users (...);
-CREATE TABLE devices (...);
-
--- V2__add_firmware_versions.sql
-CREATE TABLE firmware_versions (...);
-ALTER TABLE devices ADD COLUMN firmware_version VARCHAR(50);
-
--- V3__add_indexes.sql
-CREATE INDEX idx_devices_status ON devices(status);
-```
-
-## Monitoreo de Base de Datos
-
-### Métricas Clave
-- Tamaño de tablas
-- Número de conexiones activas
-- Queries lentas (> 1 segundo)
-- Uso de índices
-- Fragmentación de tablas
-
-### Queries de Monitoreo
-```sql
--- Tamaño de tablas
-SELECT 
-    table_name,
-    pg_size_pretty(pg_total_relation_size(quote_ident(table_name))) as size
-FROM information_schema.tables
-WHERE table_schema = 'public'
-ORDER BY pg_total_relation_size(quote_ident(table_name)) DESC;
-
--- Índices no utilizados
-SELECT * FROM pg_stat_user_indexes
-WHERE idx_scan = 0;
-```
-
 ## Conclusión
 
 Este diseño de base de datos proporciona:
@@ -699,5 +639,5 @@ Este diseño de base de datos proporciona:
 
 ---
 
-**Última actualización**: Diciembre 2024  
+**Última actualización**: Diciembre 2025 
 **Versión del esquema**: 1.0.0
