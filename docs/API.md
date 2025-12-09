@@ -1216,5 +1216,5 @@ Esta API proporciona acceso completo a todas las funcionalidades del sistema de 
 
 ---
 
-**Última Actualización**: Diciembre 2024  
+**Última Actualización**: Diciembre 2025  
 **Versión de API**: 1.0.0
