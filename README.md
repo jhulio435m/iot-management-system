@@ -171,90 +171,137 @@ graph TD
 
 ```mermaid
 erDiagram
-    USERS ||--o{ MAINTENANCE_LOGS : performs
-    LOCATIONS ||--o{ DEVICES : located_at
-    DEVICE_TYPES ||--o{ DEVICES : classifies
-    DEVICE_TYPES ||--o{ FIRMWARE_VERSIONS : has
-    IOT_PROJECTS ||--o{ DEVICES : contains
-    FIRMWARE_VERSIONS ||--o{ DEVICES : uses
-    DEVICES ||--o{ SENSORS : has
-    DEVICES ||--o{ ALERTS : generates
-    DEVICES ||--o{ MAINTENANCE_LOGS : receives
-    SENSORS ||--o{ SENSOR_READINGS : produces
+    users ||--o{ maintenance_logs : "performs"
+    users ||--o{ alerts : "resolves"
     
-    USERS {
-        int id PK
-        string name
-        string email UK
-        string role
+    locations ||--o{ devices : "hosts"
+    
+    device_types ||--o{ devices : "defines"
+    device_types ||--o{ firmware_versions : "has"
+    
+    iot_projects ||--o{ devices : "contains"
+    
+    devices ||--o{ sensors : "has"
+    devices ||--o{ alerts : "generates"
+    devices ||--o{ maintenance_logs : "receives"
+    
+    sensors ||--o{ sensor_readings : "produces"
+
+    users {
+        BIGINT id PK
+        VARCHAR name
+        VARCHAR email UK
+        VARCHAR role
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
     
-    LOCATIONS {
-        int id PK
-        string name
-        string city
-        string country
+    locations {
+        BIGINT id PK
+        VARCHAR name
+        VARCHAR address
+        VARCHAR city
+        VARCHAR country
+        DECIMAL latitude
+        DECIMAL longitude
+        TIMESTAMP created_at
     }
     
-    DEVICE_TYPES {
-        int id PK
-        string name
-        string manufacturer
+    device_types {
+        BIGINT id PK
+        VARCHAR name UK
+        TEXT description
+        VARCHAR manufacturer
+        JSONB specifications
+        TIMESTAMP created_at
     }
     
-    IOT_PROJECTS {
-        int id PK
-        string name
-        string status
-        decimal budget
+    iot_projects {
+        BIGINT id PK
+        VARCHAR name
+        TEXT description
+        VARCHAR status
+        DATE start_date
+        DATE end_date
+        DECIMAL budget
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
     
-    FIRMWARE_VERSIONS {
-        int id PK
-        string version
-        int device_type_id FK
-        date release_date
+    firmware_versions {
+        BIGINT id PK
+        BIGINT device_type_id FK
+        VARCHAR version
+        DATE release_date
+        TEXT release_notes
+        VARCHAR download_url
+        BOOLEAN is_stable
+        TIMESTAMP created_at
     }
     
-    DEVICES {
-        int id PK
-        string name
-        string mac_address UK
-        string status
-        int device_type_id FK
-        int project_id FK
-        int location_id FK
+    devices {
+        BIGINT id PK
+        BIGINT project_id FK
+        BIGINT device_type_id FK
+        BIGINT location_id FK
+        VARCHAR name
+        VARCHAR mac_address UK
+        INET ip_address
+        VARCHAR status
+        VARCHAR firmware_version
+        TIMESTAMP last_seen
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
     
-    SENSORS {
-        int id PK
-        string name
-        string sensor_type
-        string unit
-        int device_id FK
+    sensors {
+        BIGINT id PK
+        BIGINT device_id FK
+        VARCHAR name
+        VARCHAR sensor_type
+        VARCHAR unit
+        DECIMAL min_value
+        DECIMAL max_value
+        DATE calibration_date
+        BOOLEAN is_active
+        TIMESTAMP created_at
     }
     
-    SENSOR_READINGS {
-        int id PK
-        decimal value
-        timestamp timestamp
-        int sensor_id FK
+    sensor_readings {
+        BIGINT id PK
+        BIGINT sensor_id FK
+        DECIMAL value
+        TIMESTAMP timestamp
+        DECIMAL quality_score
+        JSONB metadata
     }
     
-    ALERTS {
-        int id PK
-        string severity
-        string message
-        string status
-        int device_id FK
+    alerts {
+        BIGINT id PK
+        BIGINT device_id FK
+        VARCHAR severity
+        TEXT message
+        VARCHAR alert_type
+        VARCHAR status
+        TIMESTAMP created_at
+        TIMESTAMP resolved_at
+        BIGINT resolved_by FK
     }
     
-    MAINTENANCE_LOGS {
-        int id PK
-        string maintenance_type
-        string status
-        int device_id FK
-        int technician_id FK
+    maintenance_logs {
+        BIGINT id PK
+        BIGINT device_id FK
+        BIGINT technician_id FK
+        VARCHAR maintenance_type
+        TEXT description
+        VARCHAR status
+        TIMESTAMP scheduled_date
+        TIMESTAMP completed_date
+        DECIMAL cost
+        TEXT[] parts_replaced
+        TEXT notes
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 ```
 
