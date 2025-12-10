@@ -378,7 +378,7 @@ Permite agrupar dispositivos por ubicación geográfica para análisis regional 
 - UNIQUE: mac_address
 - ON DELETE CASCADE: project_id (si se elimina proyecto, se eliminan dispositivos)
 - ON DELETE RESTRICT: device_type_id (no se puede eliminar tipo si hay dispositivos)
-- ON DELETE SET NULL: location_id (si se elimina ubicación, se pone NULL)
+- ON DELETE CASCADE: location_id (si se elimina ubicación, se eliminan dispositivos)
 
 **Índices**:
 - idx_devices_status
@@ -580,6 +580,7 @@ Inversas de las relaciones 1:N mencionadas arriba.
 ### CASCADE
 Eliminación en cascada cuando se elimina el padre:
 - `iot_projects` -> `devices`
+- `locations` -> `devices`
 - `device_types` -> `firmware_versions`
 - `devices` -> `sensors`
 - `devices` -> `alerts`
@@ -593,7 +594,6 @@ Previene eliminación del padre si existen hijos:
 
 ### SET NULL
 Establece NULL en FK cuando se elimina el padre:
-- `locations` -> `devices.location_id`
 - `users` -> `alerts.resolved_by`
 
 ## Índices y Performance
