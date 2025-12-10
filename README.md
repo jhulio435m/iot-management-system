@@ -69,7 +69,7 @@ Proyecto académico de bases de datos relacionales implementado como una aplicac
 - Más de 800 registros de datos de ejemplo
 
 **Backend API**:
-- 48 endpoints REST (21 GET + 9 POST + 8 PUT + 9 DELETE)
+- 48 endpoints REST (21 GET + 7 POST + 7 PUT + 7 DELETE)
 - Implementado con Hono.js en Supabase Edge Functions
 - Consultas SQL con JOINs de hasta 5 tablas
 - Validación de integridad referencial
@@ -116,8 +116,8 @@ graph TD
     subgraph Client [" Capa 1: Presentación "]
         direction TB
         Componentes[React Components]:::frontend
-        Vistas[9 Vistas Principales]:::frontend
-        Forms[9 Formularios CRUD]:::frontend
+        Vistas[8 Vistas Principales]:::frontend
+        Forms[7 Formularios CRUD]:::frontend
     end
     
     %% --- GRUPO 2: SERVIDOR ---
