@@ -212,21 +212,21 @@ graph TD
 
 ```mermaid
 erDiagram
-    users ||--o{ maintenance_logs : "performs"
-    users ||--o{ alerts : "resolves"
+    users ||--o{ maintenance_logs : "realiza"
+    users ||--o{ alerts : "resuelve"
     
-    locations ||--o{ devices : "hosts"
+    locations ||--o{ devices : "hospeda"
     
-    device_types ||--o{ devices : "defines"
-    device_types ||--o{ firmware_versions : "has"
+    device_types ||--o{ devices : "define"
+    device_types ||--o{ firmware_versions : "tiene"
     
-    iot_projects ||--o{ devices : "contains"
+    iot_projects ||--o{ devices : "contiene"
     
-    devices ||--o{ sensors : "has"
-    devices ||--o{ alerts : "generates"
-    devices ||--o{ maintenance_logs : "receives"
+    devices ||--o{ sensors : "tiene"
+    devices ||--o{ alerts : "generas"
+    devices ||--o{ maintenance_logs : "recibe"
     
-    sensors ||--o{ sensor_readings : "produces"
+    sensors ||--o{ sensor_readings : "produce"
 
     users {
         BIGINT id PK
