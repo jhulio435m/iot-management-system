@@ -69,10 +69,11 @@ Proyecto académico de bases de datos relacionales implementado como una aplicac
 - Más de 800 registros de datos de ejemplo
 
 **Backend API**:
-- 28 endpoints REST (19 GET + 9 POST)
+- 48 endpoints REST (21 GET + 9 POST + 8 PUT + 9 DELETE)
 - Implementado con Hono.js en Supabase Edge Functions
 - Consultas SQL con JOINs de hasta 5 tablas
 - Validación de integridad referencial
+- Análisis de impacto de eliminación en cascada
 
 **Frontend**:
 - 9 componentes principales con visualización de datos
@@ -123,7 +124,7 @@ graph TD
     subgraph Server [" Capa 2: Lógica de Negocio "]
         direction TB
         Hono[[Hono.js Server]]:::backend
-        Endpoints[28 Endpoints REST]:::backend
+        Endpoints[48 Endpoints REST]:::backend
         Validacion{{Validación de Datos}}:::backend
     end
     
@@ -161,9 +162,11 @@ graph TD
 - `SensorsAnalytics.tsx` - Análisis detallado de sensores
 
 **Capa de Lógica de Negocio**:
-- Servidor Hono.js con 28 endpoints REST
-- 19 endpoints GET para consultas analíticas
+- Servidor Hono.js con 48 endpoints REST
+- 21 endpoints GET para consultas analíticas
 - 9 endpoints POST para inserciones
+- 8 endpoints PUT para actualizaciones
+- 9 endpoints DELETE para eliminaciones
 - Validación de integridad referencial antes de inserciones
 
 **Capa de Persistencia**:
@@ -538,7 +541,7 @@ Especificación técnica de la arquitectura del sistema:
 ### 🔌 [Documentación de API REST](./docs/API.md)
 
 Especificación completa de la interfaz de programación:
-- 28 endpoints REST documentados (19 GET + 9 POST)
+- 48 endpoints REST documentados (21 GET + 9 POST + 8 PUT + 9 DELETE)
 - Especificación detallada de parámetros de entrada/salida
 - Códigos de estado HTTP y manejo de errores
 - Ejemplos de peticiones con cURL
@@ -565,7 +568,7 @@ Este proyecto demuestra exitosamente la implementación de conceptos avanzados d
 
 3. **Arquitectura de Software**
    - Separación clara de responsabilidades en tres capas
-   - 28 endpoints REST bien estructurados
+   - 48 endpoints REST bien estructurados (GET, POST, PUT, DELETE)
    - Validación de integridad en múltiples niveles
 
 4. **Interfaz de Usuario**
